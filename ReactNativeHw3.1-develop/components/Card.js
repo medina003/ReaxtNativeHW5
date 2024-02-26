@@ -2,50 +2,43 @@ import React, { lazy } from "react";
 import { View, Text, StyleSheet, Alert, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Image } from "expo-image";
-const Card = ({ imageSource, productInfo }) => {
-  const handlePress = () => {
-    Alert.alert("Info about item", productInfo);
-  };
-
+const Card = ({ imageSource }) => {
   return (
-    <TouchableOpacity onPress={handlePress}>
-      <View style={styles.container2}>
-        <View style={styles.box}>
-          <Image style={styles.image} source={imageSource} />
-        </View>
-        <View style={{ flex: 1, flexDirection: "column", flexWrap: "wrap" }}>
-          <Text style={{ fontSize: 14, lineHeight: 16.94 }}>Item #1 Name</Text>
-          <Text style={{ fontSize: 14, lineHeight: 16.94 }}>Goes here</Text>
-          <Text
-            style={{
-              marginTop: 5,
-              fontSize: 14,
-
-              lineHeight: 16.94,
-            }}
-          >
-            $19.99
-          </Text>
-        </View>
-      </View>
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <Image
+        style={styles.img}
+        source={imageSource}
+        contentFit="cover"
+        transition={1000}
+      />
+      <Text style={styles.heading}>Header</Text>
+      <Text>
+        He'll want to use your yacht, and I don't wat this thing smelling like
+        fish
+      </Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container2: {
-    flex: 1,
-    flexDirection: "column",
-    gap: 10,
-  },
-  box: {
-    width: 110,
-    height: 110,
-    borderRadius: 8,
-  },
-  image: {
+  container: {
     flex: 1,
     width: "100%",
+    padding: 10,
+    borderRadius: 3,
+    marginVertical: 5,
+  },
+  img: {
+    height: 200,
+    width: "100%",
+    backgroundColor: "#F6F6F6",
+    borderColor: "grey",
+    borderRadius: 3,
+    marginVertical: 5,
+  },
+  heading: {
+    fontSize: 20,
+    fontWeight: "700",
   },
 });
 
