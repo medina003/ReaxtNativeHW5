@@ -17,12 +17,6 @@ const Main = () => {
     setNameValue(text);
   };
 
-  const [emailValue, setEmailValue] = useState("");
-
-  const handleEmailChange = (text) => {
-    setEmailValue(text);
-  };
-
   const [pswValue, setPswValue] = useState("");
 
   const handlePswChange = (text) => {
@@ -38,9 +32,7 @@ const Main = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.miniTextLeft}>X</Text>
-        <Text style={styles.largeText}>Sign Up</Text>
-        <Text style={styles.miniTextRight}>Login</Text>
+        <Text style={styles.largeText}>Log In</Text>
       </View>
       <View style={styles.inputsContainer}>
         <View style={styles.inputContainer}>
@@ -50,15 +42,6 @@ const Main = () => {
             value={nameValue}
             onChangeText={handleNameChange}
             maxLength={100}
-          ></TextInput>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            maxLength={100}
-            value={emailValue}
-            onChangeText={handleEmailChange}
           ></TextInput>
         </View>
         <View style={styles.passwordContainer}>
@@ -79,14 +62,9 @@ const Main = () => {
             <Text style={styles.green}>{showPassword ? "Hide" : "Show"}</Text>
           </Pressable>
         </View>
-        <Text style={styles.gray}>
-          <Icon name="square-o"> </Icon>I would like to receive your newsletter
-          and other promotional information.
-        </Text>
-
         <View style={styles.bottomContainer}>
           <Pressable style={styles.btnContainer}>
-            <Text style={styles.heading}>Sign up</Text>
+            <Text style={styles.heading}>Log In</Text>
           </Pressable>
           <Text style={styles.green}>Forgot your password?</Text>
         </View>
@@ -100,6 +78,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     flex: 1,
     flexDirection: "column",
+    width: "100%",
   },
   btnContainer: {
     width: "100%",
@@ -122,7 +101,7 @@ const styles = StyleSheet.create({
   header: {
     width: "auto",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     gap: 80,
     alignItems: "center",
   },
