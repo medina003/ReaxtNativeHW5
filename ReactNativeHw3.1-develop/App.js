@@ -10,8 +10,6 @@ import {
 } from "react-native";
 import { Image } from "expo-image";
 import Main from "./components/Main";
-import Card from "./components/Card";
-
 const App = () => {
   return (
     <View style={styles.container}>

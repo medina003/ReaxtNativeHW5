@@ -1,44 +1,95 @@
 import React, { lazy } from "react";
-import { View, Text, StyleSheet, ScrollView, TextInput } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
-import Card from "./Card";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+  Pressable,
+} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { useEffect, useState } from "react";
 
 const Main = () => {
-  const [textValue, setTextValue] = useState("");
+  const [nameValue, setNameValue] = useState("");
 
-  const handleInputChange = (text) => {
-    setTextValue(text);
+  const handleNameChange = (text) => {
+    setNameValue(text);
   };
 
-  useEffect(() => {
-    console.log("textValue", textValue);
-  }, [textValue]);
+  const [emailValue, setEmailValue] = useState("");
+
+  const handleEmailChange = (text) => {
+    setEmailValue(text);
+  };
+
+  const [pswValue, setPswValue] = useState("");
+
+  const handlePswChange = (text) => {
+    setPswValue(text);
+  };
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  function toggleBtn() {
+    setIsChecked(!isChecked);
+  }
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.miniText}>Back</Text>
-        <Text style={styles.largeText}>Content</Text>
-        <Text style={styles.miniText}>Filter</Text>
+        <Text style={styles.miniTextLeft}>X</Text>
+        <Text style={styles.largeText}>Sign Up</Text>
+        <Text style={styles.miniTextRight}>Login</Text>
       </View>
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Search"
-          value={textValue}
-          onChangeText={handleInputChange}
-        ></TextInput>
-      </View>
+      <View style={styles.inputsContainer}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Name"
+            value={nameValue}
+            onChangeText={handleNameChange}
+            maxLength={100}
+          ></TextInput>
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            maxLength={100}
+            value={emailValue}
+            onChangeText={handleEmailChange}
+          ></TextInput>
+        </View>
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            maxLength={100}
+            value={pswValue}
+            onChangeText={handlePswChange}
+            secureTextEntry={!showPassword}
+          />
+          <Pressable
+            onPress={() => setShowPassword(!showPassword)}
+            style={({ pressed }) => ({
+              opacity: pressed ? 0.5 : 1,
+            })}
+          >
+            <Text style={styles.green}>{showPassword ? "Hide" : "Show"}</Text>
+          </Pressable>
+        </View>
+        <Text style={styles.gray}>
+          <Icon name="square-o"> </Icon>I would like to receive your newsletter
+          and other promotional information.
+        </Text>
 
-      <View style={styles.itemsBox}>
-        <ScrollView>
-          <Card imageSource="https://www.uniza.sk/images/fotogaleria/oznamy-pre-studentov/2019/11032019_iPhone-XR.jpg"></Card>
-          <Card imageSource="https://pbs.twimg.com/media/D_2iAI0W4AAX40e.jpg:large"></Card>
-          <Card imageSource="https://www.uniza.sk/images/fotogaleria/oznamy-pre-studentov/2019/11032019_iPhone-XR.jpg"></Card>
-          <Card imageSource="https://pbs.twimg.com/media/D_2iAI0W4AAX40e.jpg:large"></Card>
-          <Card imageSource="https://www.uniza.sk/images/fotogaleria/oznamy-pre-studentov/2019/11032019_iPhone-XR.jpg"></Card>
-          <Card imageSource="https://pbs.twimg.com/media/D_2iAI0W4AAX40e.jpg:large"></Card>
-        </ScrollView>
+        <View style={styles.bottomContainer}>
+          <Pressable style={styles.btnContainer}>
+            <Text style={styles.heading}>Sign up</Text>
+          </Pressable>
+          <Text style={styles.green}>Forgot your password?</Text>
+        </View>
       </View>
     </View>
   );
@@ -50,13 +101,23 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
   },
-  itemsBox: {
+  btnContainer: {
+    width: "100%",
+    backgroundColor: "#5DB075",
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    marginVertical: 20,
+  },
+  heading: {
+    fontSize: 20,
+    color: "white",
+  },
+  bottomContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 20,
-    marginTop: 20,
-    marginBottom: 20,
+    alignItems: "center",
   },
   header: {
     width: "auto",
@@ -65,7 +126,12 @@ const styles = StyleSheet.create({
     gap: 80,
     alignItems: "center",
   },
-  miniText: {
+  miniTextLeft: {
+    fontSize: 16,
+    lineHeight: 19.36,
+    color: "gray",
+  },
+  miniTextRight: {
     fontSize: 16,
     lineHeight: 19.36,
     color: "#5DB075",
@@ -74,24 +140,41 @@ const styles = StyleSheet.create({
     fontSize: 30,
     lineHeight: 36.31,
   },
-
-  searchContainer: {
-    display: "flex",
-    justifyContent: "center",
-    backgroundColor: "#E8E8E8",
+  inputsContainer: {
+    marginVertical: 30,
+    flex: 1,
+    flexDirection: "column",
+    gap: 15,
+  },
+  inputContainer: {
+    backgroundColor: "#F6F6F6",
     borderColor: "lightgray",
     borderWidth: 1,
-    borderRadius: 15,
-    width: 380,
-    height: 40,
+    borderRadius: 8,
     padding: 5,
     paddingLeft: 10,
     paddingRight: 10,
-    marginVertical: 20,
+  },
+  passwordContainer: {
+    backgroundColor: "#F6F6F6",
+    borderWidth: 1,
+    borderColor: "lightgrey",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    padding: 5,
   },
   input: {
     fontSize: 16,
     color: "gray",
+  },
+  green: {
+    color: "green",
+  },
+  gray: {
+    color: "grey",
   },
 });
 
